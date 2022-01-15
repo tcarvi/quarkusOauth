@@ -61,7 +61,7 @@
                 - HTTP Communications for Authorization Request.
             - Etapa A-3
                 - Resource Server or Authorization Server returns an Authorization Grant to the client.
-        - **Teste: verificar no RESPONSE a ser enviado para o cliente se há Authorization Grant. O endpoint do resource nen começou a ser processado ainda.***
+        - **Teste: verificar no RESPONSE a ser enviado para o cliente se há Authorization Grant. O endpoint do resource nem começou a ser processado ainda.***
     - Etapa B (Reception of Authorization Grant)
         - The client (Browser or AngularJs app) receives an authorization grant, which is a credential representing the resource owner's authorization, expressed using one of four grant types defined in this specification or using an extension grant type.  
             - Grant types defined in this specification:
@@ -76,9 +76,9 @@
     - Etapa D (Authorization server returns an Acess Token to the client)
         - The authorization server authenticates the client and validates the authorization grant, and if valid, issues an access token.
     - Etapa E (Client request a resource, with its acdess token)
-        - **Observação: Apenas este momento, o client passou a ter "Access Token" para requisitar resources.***
-        -   (E)  The client requests the protected resource from the resource server and authenticates by presenting the access token.
+        - **Observação: Apenas este momento, o client passou a ter "Access Token" para requisitar resources.**
+        - The client requests the protected resource from the resource server and authenticates by presenting the "access token".
     - Etapa final F (Resource server serves the request)
-        - The resource server validates the access token, and if valid, serves the request.
+        - The resource server validates the access token, and if valid, serves the request, giving the "resource" to the "client".
 
 
