@@ -1,0 +1,33 @@
+### The OAuth 2.0 Authorization Framework
+- https://datatracker.ietf.org/doc/html/rfc6749
+
+- Abstract
+    - A client webapp, written in AngularJs for example, requests a resource in the internet.
+        - The resource may be represented by a REST endpoint in a quarkus Resource Server, for example.
+    - The communication is done through HTTP requests that are sent by the client to a Resource Server or to the Authenticaion Server.
+        - The Resource Server and the Authentication Server are two diferent instances in the oAuth2 authorization framework flow.
+    - The client receives a limited access to this resource.
+    - This limited access may be granted by the resource owner
+    - Or by an interaction between the resource owner and the HTTP service.
+        - The resource owner controls the resource represented in an endpoint.
+        - And the HTTP Service represents the Resource Server services and the Authentication Server services which interact to create tokens to client authentication. 
+- Problems of a traditional client-server authentication model:
+    - The client requests an access-restricted resource (protected resource) on the server by authenticating with the server using the resource owner's credentials.
+    - Resource Server and Client must have the resource owner's credentials.
+    - Third-party applications are required to store the resource owner's credentials for future use, typically a password in clear-text.
+    - In order to provide third-party applications access to restricted resources, the resource owner shares its credentials with the third party. Again, that can be a security problem.
+    - Servers are required to support password authentication, despite the security weaknesses inherent in passwords.
+    - Resource owners cannot revoke access to an individual third party without revoking access to all third parties, and must do so by changing the third party's password.
+    - Compromise of any third-party application results in compromise of the end-user's password and all of the data protected by that password.
+- Why should we use oAuth2?
+    - OAuth uses a new layer for authorization: 
+        - an Authorization Layer done by "access tokens".
+    - OAuth separates the role of the client from that of the resource owner.
+        - The Client doesn't receive Resource Owner exclusive credentials.
+        - In OAuth, the client is issued a different set of credentials than those of the resource owner.
+        - The client obtains an access token -- a string denoting a specific scope, lifetime, and other access attributes.
+    - Oauth Authorization Layer is based on "Access Tokens"
+        - An Authorization Server emits "Access Tokens" with the approval of the resource owner.  
+        - The client uses the access token to access the protected resources hosted by the resource server.
+    - Example that shows the Authorization Layer:
+        - An end-user (resource owner) can grant a AngularJs webapp (client) access to a REST Resource that is stored in a Resource Server, without sharing her username and password with the Resource Server or with the client. Instead, the Client (AngularJs webapp) authenticates directly with a server trusted by Authorization Server. The Trusted Server issues the resource access through delegation-specific credentials (access token).
