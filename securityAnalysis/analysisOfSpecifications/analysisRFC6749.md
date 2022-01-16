@@ -117,7 +117,7 @@
     - Unlike access tokens, refresh tokens are intended for use only with authorization servers and are never sent to resource servers.
 - Refreshing an Expired Access Token
     - Communication Flow:
-    ![Refreshing an expired Access Token](./IETF_RFC6749_RefreshingAnExpiredAccessToken.png)
+    ![Refreshing an expired Access Token](./img/IETF_RFC6749_RefreshingAnExpiredAccessToken.png)
 - TLS Version
     - Whenever Transport Layer Security (TLS) is used by this specification, the appropriate version (or versions) of TLS will vary over time, based on the widespread deployment and known security vulnerabilities.
     - At the time of this writing, TLS version 1.2 [RFC5246] is the most recent version, but has a very limited deployment base and might not be readily available for implementation.
