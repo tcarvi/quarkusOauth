@@ -80,5 +80,87 @@
         - The client requests the protected resource from the resource server and authenticates by presenting the "access token".
     - Etapa final F (Resource server serves the request)
         - The resource server validates the access token, and if valid, serves the request, giving the "resource" to the "client".
-
-
+- Authorization Grant
+    - **Obs.: Credencial de acesso fornecida ao** ***client*** **que possibilita a solicitação de** ***access token.***
+    - An authorization grant is a credential representing the resource owner's authorization (to access its protected resources) used by the client to obtain an access token. 
+    - This specification defines four grant types of Authorization Grant:
+        - authorization code, **<--- Most Secure Choice**
+        - implicit,
+        - resource owner password credentials, and
+        - client credentials.
+    - Other types of Authorization Grant is permited, if an extensibility mechanism for defining additional types is used.
+- Authorization Grant (Type: Authorization Code)  **<--- Most Secure Choice**
+    - The authorization code is obtained by using an authorization server as an intermediary between the client and resource owner.
+    - Instead of requesting authorization directly from the resource owner, the client directs the resource owner to an authorization server (via its user-agent as defined in [RFC2616]), which in turn directs the - The Resource Owner back to the client with the authorization code.
+    - Before directing the resource owner back to the client with the authorization code, the authorization server authenticates the resource owner and obtains authorization.
+    - Because the resource owner only authenticates with the authorization server, the resource owner's credentials are never shared with the client.
+    - The authorization code provides a few important security benefits, such as the ability to authenticate the client, as well as the transmission of the access token directly to the client without passing it through the resource owner's user-agent and potentially exposing it to others, including the resource owner.
+- Access Token
+    - Access tokens are credentials used to access protected resources. 
+    - An access token is a string representing an authorization issued to the client.
+    - The string is usually opaque to the client.
+    - Tokens represent specific scopes and durations of access, granted by the resource owner, and enforced by the resource server and authorization server.
+    - The token may denote an identifier used to retrieve the authorization information or may self-contain the authorization information in a verifiable manner (i.e., a token string consisting of some data and a signature).
+    - Additional authentication credentials, which are beyond the scope of this specification, may be required in order for the client to use a token.
+    - The access token provides an abstraction layer, replacing different authorization constructs (e.g., username and password) with a single token understood by the resource server.
+    - This abstraction enables issuing access tokens more restrictive than the authorization grant used to obtain them, as well as removing the resource server's need to understand a wide range of authentication methods.
+    - Access tokens can have different formats, structures, and methods of utilization (e.g., cryptographic properties) based on the resource server security requirements.
+    - Access token attributes and the methods used to access protected resources are beyond the scope of this specification and are defined by companion specifications such as [RFC6750].
+- Refresh Token
+    - Refresh tokens are credentials used to obtain access tokens.
+    - Refresh tokens are issued to the client by the authorization server and are used to obtain a new access token when the current access token becomes invalid or expires, or to obtain additional access tokens with identical or narrower scope (access tokens may have a shorter lifetime and fewer permissions than authorized by the resource owner).
+    - Issuing a refresh token is optional at the discretion of the authorization server.
+    - If the authorization server issues a refresh token, it is included when issuing an access token (i.e., step (D) in Figure 1).
+    - A refresh token is a string representing the authorization granted to the client by the resource owner.
+    - The string is usually opaque to the client.
+    - The token denotes an identifier used to retrieve the authorization information.
+    - Unlike access tokens, refresh tokens are intended for use only with authorization servers and are never sent to resource servers.
+- TLS Version
+    - Whenever Transport Layer Security (TLS) is used by this specification, the appropriate version (or versions) of TLS will vary over time, based on the widespread deployment and known security vulnerabilities.
+    - At the time of this writing, TLS version 1.2 [RFC5246] is the most recent version, but has a very limited deployment base and might not be readily available for implementation.
+    - TLS version 1.0 [RFC2246] is the most widely deployed version and will provide the broadest interoperability.
+    - Implementations MAY also support additional transport-layer security mechanisms that meet their security requirements.
+- HTTP Redirections
+    - This specification makes extensive use of HTTP redirections, in which the client or the authorization server directs the resource owner's user-agent to another destination.
+    - While the examples in this specification show the use of the ***HTTP 302 status code***, any other method available via the user-agent to accomplish this redirection is allowed and is considered to be an implementation detail.
+- Interoperability
+    - OAuth 2.0 provides a rich authorization framework with well-defined security properties.
+    - However, as a rich and highly extensible framework with many optional components, on its own, this specification is likely to produce a wide range of non-interoperable implementations.
+    - In addition, this specification leaves a few required components partially or fully undefined (e.g., client registration, authorization server capabilities, endpoint discovery).
+    - Without these components, clients must be manually and specifically configured against a specific authorization server and resource server in order to interoperate.
+    - This framework was designed with the clear expectation that future work will define prescriptive profiles and extensions necessary to achieve full web-scale interoperability.
+- Client Registration
+    - Before initiating the protocol, the client registers with the authorization server.
+    - The means through which the client registers with the authorization server are beyond the scope of this specification but typically involve end-user interaction with an HTML registration form.
+    - Client registration does not require a direct interaction between the client and the authorization server.
+    - When supported by the authorization server, registration can rely on other means for establishing trust and obtaining the required client properties (e.g., redirection URI, client type).
+    - For example, registration can be accomplished using a self-issued or third-party-issued assertion, or by the authorization server performing client discovery using a trusted channel.
+    - When registering a client, the client developer SHALL:
+        - specify the client type as described in Section 2.1,
+        - provide its client redirection URIs as described in Section 3.1.2, and
+        - include any other information required by the authorization server (e.g., application name, website, description, logo image, the acceptance of legal terms).
+- Client Types
+    - OAuth defines two client types, based on their ability to authenticate securely with the authorization server (i.e., ability to maintain the confidentiality of their client credentials):
+    - confidential
+        - Clients capable of maintaining the confidentiality of their credentials (e.g., client implemented on a secure server with restricted access to the client credentials), or capable of secure client authentication using other means.
+    - public
+        - Clients incapable of maintaining the confidentiality of their credentials (e.g., clients executing on the device used by the resource owner, such as an installed native application or a web browser-based application), and incapable of secure client authentication via any other means.
+    - The client type designation is based on the authorization server's definition of secure authentication and its acceptable exposure levels of client credentials. The authorization server SHOULD NOT make assumptions about the client type.
+    - A client may be implemented as a distributed set of components, each with a different client type and security context (e.g., a distributed client with both a confidential server-based component and a public browser-based component). If the authorization server does not provide support for such clients or does not provide guidance with regard to their registration, the client SHOULD register each component as a separate client.
+    - This specification has been designed around the following client profiles:
+        - web application
+            - A web application is a confidential client running on a web server.
+            - Resource owners access the client via an HTML user interface rendered in a user-agent on the device used by the resource owner.
+            - The client credentials as well as any access token issued to the client are stored on the web server and are not exposed to or accessible by the resource owner.
+        - user-agent-based application  ** < --- **
+            - A user-agent-based application is a public client in which the client code is downloaded from a web server and executes within a user-agent (e.g., web browser) on the device used by the resource owner.
+            - Protocol data and credentials are easily accessible (and often visible) to the resource owner.
+            - Since such applications reside within the user-agent, they can make seamless use of the user-agent capabilities when requesting authorization.
+        - Native Application
+            - A native application is a public client installed and executed on the device used by the resource owner.
+            - Protocol data and credentials are accessible to the resource owner.
+            - It is assumed that any client authentication credentials included in the application can be extracted.
+            - On the other hand, dynamically issued credentials such as access tokens or refresh tokens can receive an acceptable level of protection.
+            - At a minimum, these credentials are protected from hostile servers with which the application may interact.
+            - On some platforms, these credentials might be protected from other applications residing on the same device.
+        
