@@ -48,7 +48,7 @@
         - The interaction between the authorization server and resource server is beyond the scope of this specification. The authorization server may be the same server as the resource server or a separate entity. A single authorization server may issue access tokens accepted by multiple resource servers.
 - Protocol Flow
     - Abstract Protocol Flow  
-    ![Abstract Protocol Flow](./imgMarkdowns/IETF_RFC6749_AbstractProtocolFlow.png)
+    ![Abstract Protocol Flow](./img/IETF_RFC6749_AbstractProtocolFlow.png)
     - Etapa Inicial A-1 (Client's Authorization Request)
         - The client (Browser or AngularJs app) requests some resource and the "OAuth 2.0 Authorization Framework flow" begins.
         - The client (Browser or AngularJs app) requests authorization from the resource owner. The authorization request can be made directly to the resource owner (as shown), or preferably indirectly via the authorization server as an intermediary.
@@ -115,6 +115,9 @@
     - The string is usually opaque to the client.
     - The token denotes an identifier used to retrieve the authorization information.
     - Unlike access tokens, refresh tokens are intended for use only with authorization servers and are never sent to resource servers.
+- Refreshing an Expired Access Token
+    - Communication Flow:
+    ![Refreshing an expired Access Token](./IETF_RFC6749_RefreshingAnExpiredAccessToken.png)
 - TLS Version
     - Whenever Transport Layer Security (TLS) is used by this specification, the appropriate version (or versions) of TLS will vary over time, based on the widespread deployment and known security vulnerabilities.
     - At the time of this writing, TLS version 1.2 [RFC5246] is the most recent version, but has a very limited deployment base and might not be readily available for implementation.
@@ -163,4 +166,5 @@
             - On the other hand, dynamically issued credentials such as access tokens or refresh tokens can receive an acceptable level of protection.
             - At a minimum, these credentials are protected from hostile servers with which the application may interact.
             - On some platforms, these credentials might be protected from other applications residing on the same device.
+
         
