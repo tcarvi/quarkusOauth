@@ -1,3 +1,5 @@
+## Como configurar uma requisição HTTP com protocolo (HTTPS+TLS_1_1) e com certificados do cliente?
+
 Conforme especificação "The OAuth 2.0 Authorization Framework" ([RFC6749](https://datatracker.ietf.org/doc/html/rfc6749))
 - ***TLS Version***
   - Whenever Transport Layer Security (TLS) is used by this specification, the appropriate version (or versions) of TLS will vary over time, based on the widespread deployment and known security vulnerabilities.
@@ -17,6 +19,7 @@ Conforme especificação "The OAuth 2.0 Authorization Framework" ([RFC6749](http
         .version(Version.HTTP_1_1)  
         .followRedirects(Redirect.NORMAL)  
         .connectTimeout(Duration.ofSeconds(20))  
+        .sslContext(sslContextObject)
         .proxy(ProxySelector.of(new InetSocketAddress("proxy.example.com", 80)))  
         .authenticator(Authenticator.getDefault())  
         .build();   
