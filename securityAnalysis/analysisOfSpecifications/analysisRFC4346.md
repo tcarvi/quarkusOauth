@@ -8,7 +8,7 @@
 - application protocol
   - An application protocol is a protocol that normally layers directly on top of the transport layer (e.g., TCP/IP).  Examples include HTTP, TELNET, FTP, and SMTP. 
 - **Obs.:** 
-  - Há uma camada de Transporte: TCP/IP. Cujos protocolos possuem padrões e formas de específicas de comunicação.
+  - Há uma camada de Transporte: TCP/IP, cujos protocolos possuem padrões e formas de específicas de comunicação.
   - Sobre esta camada, pode-se usar outra camada de padrões: uma camada de ***application protocol***.
   - Como exemplo de ***application protocol***, tem-se o HTTP. 
   - HTTP nomalmente usa a porta 80. (redirecionamento automático pelo browser)
