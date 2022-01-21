@@ -4,7 +4,7 @@ Conforme especificação "The OAuth 2.0 Authorization Framework" ([RFC6749](http
   - At the time of this writing, TLS version 1.2 [RFC5246] is the most recent version, but has a very limited deployment base and might not be readily available for implementation.
   - TLS version 1.0 [RFC2246] is the most widely deployed version and will provide the broadest interoperability.
   - Implementations MAY also support additional transport-layer security mechanisms that meet their security requirements.
-- Em resumo, ***Para OAuth 2, deve-se usar requisicões de autenticação com TLS 1.0.***
+- Em resumo, ***Para OAuth 2, implementações do "Authorization Server" devem, no mínimo, aceitar requisições HTTP criadas com autenticação TLS 1.0.***
 - Implemento análise sobre este protocolo de comunicação e indico forma de se configurar a requisição HTTP com o parâmetro SSLContext.
 - Busco identificar a forma correta de se configurar o HttpClient e o HttpRequest para se usar o TLS 1.0.
   - Não há qualquer tipo de "informação sigilosa" nesta implementação. Apenas busco codificar corretamente o protocolo TLS 1.0. 
