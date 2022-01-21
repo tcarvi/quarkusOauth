@@ -15,13 +15,37 @@ Conforme especificação "The OAuth 2.0 Authorization Framework" ([RFC6749](http
   - Classe: HttpClientBuilder
     - https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpClient.Builder.html. 
     ```shell. 
-    HttpClient client = HttpClient.newBuilder()   
+    SSLContextSpi sslContextSpi = new SSLContextSpi();
+    // km - the sources of authentication keys
+    try {
+        KeyStore keyStore = KeyStore.getInstance("PKCS12");
+        char[] password = "some password".toCharArray();
+        keyStore.load(null, null);
+        FileOutputStream fos = new FileOutputStream("keystore.p12");
+        keyStore.store(fos, "password".toCharArray());
+        fos.close();
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }    
+    
+    
+
+    keyManagerArray
+    // tm - the sources of peer authentication trust decisions
+    trustManagerArray
+    // sr - the source of randomness
+    secureRandom
+    sslContextSpi.engineInit(keyManagerArray, trustManagerArray, secureRandom);
+    Provider provider = new Provider​(name, versionStr, info);
+    String protocol = "TLSv1.1";
+    SSLContext sslContextobject = new SSLContext(sslContextSpi, provider, protocol)
+    sslContextobject.init(keyManagerArray, trustManagerArray, secureRandom)
+    // Criação de httpClient configurado para usar protocolo (HTTPS_TLS_1_1)
+    HttpClient httpClient = HttpClient.newBuilder()   
         .version(Version.HTTP_1_1)  
         .followRedirects(Redirect.NORMAL)  
         .connectTimeout(Duration.ofSeconds(20))  
-        .sslContext(sslContextObject)
-        .proxy(ProxySelector.of(new InetSocketAddress("proxy.example.com", 80)))  
-        .authenticator(Authenticator.getDefault())  
+        .sslContext(sslContextObject) 
         .build();   
     ```
   - Método: HttpClientBuilder.sslContext
@@ -36,10 +60,18 @@ Conforme especificação "The OAuth 2.0 Authorization Framework" ([RFC6749](http
   - Classe: SSLContext
     - https://docs.oracle.com/en/java/javase/11/docs/api/java.base/javax/net/ssl/SSLContext.html
     ```shel  
-    // Creates an SSLContext object  
-    SSLContext sslContextobject = new SSLContext(SSLContextSpi contextSpi, Provider provider, String protocol)  
+    SSLContextSpi sslContextSpi = new SSLContextSpi();
+    // Analisar obtenção de keyManagerArray, trustManagerArray e secureRandom
+    sslContextSpi.engineInit(keyManagerArray, trustManagerArray, secureRandom);
+    // Analisar obtenção de name, versionStr e info
+    Provider provider = new Provider​(name, versionStr, info);
+    // String Protocol
+    String protocol = "TLSv1.1";
+    // Creates an SSLContext object 
+    SSLContext sslContextobject = new SSLContext(sslContextSpi, provider, protocol)  
     ```  
   - Método: SSContext (constructor)
+    - https://docs.oracle.com/en/java/javase/11/docs/api/java.base/javax/net/ssl/SSLContext.html#%3Cinit%3E(javax.net.ssl.SSLContextSpi,java.security.Provider,java.lang.String)
     ```shell  
     Assinatura: protected SSLContext​(SSLContextSpi contextSpi, Provider provider, String protocol)
     Creates an SSLContext object.
