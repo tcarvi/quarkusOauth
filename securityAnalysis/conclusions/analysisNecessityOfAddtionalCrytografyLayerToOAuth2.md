@@ -1,8 +1,8 @@
 ## Planning of Implementation:
-    - If we follow OAuth2 correctly, we shouldn't have problems with what is defined in the specification.
-    - But, during Grant Authentication, we can't loose control over "client_id" and "client_secret" variables.
-    - So, we must criate an ADDITIONAL AND INDEPENDENT LAYER OF SECURITY to protect these variables.
-    - If we implement OAuth2 correctly and if we protect our network AND THESE VARIABLES, we should have a secure implementation.
+- If we follow OAuth2 correctly, we shouldn't have problems with what is defined in the specification.
+- But, during Grant Authentication, we can't loose control over "***client_id***" and "***client_secret***" variables.
+- So, we must criate an ADDITIONAL AND INDEPENDENT LAYER OF SECURITY to protect these variables.
+- If we implement OAuth2 correctly and if we protect our network AND THESE VARIABLES, we should have a secure implementation.
     - Following OAuth 2.0, we must, of course, pay attention to its RFC6819 "Threat Model and Security Considerations".
     - And we must make analysis of possible unsecure scenarios like the ones presented in https://arxiv.org/abs/1601.01229.
 
