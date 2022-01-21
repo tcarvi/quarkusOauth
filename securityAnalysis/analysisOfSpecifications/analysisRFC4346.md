@@ -20,8 +20,9 @@
   - Em resumo, o (HTTPS+TSL) é um protocolo de comunicação que se apresenta na camada de ***application protocol*** sobre a camada de TCP/IP.
   -  O que é relevante saber, para implementação Java Quarkus?
     - Para requisições (HTTPS+TSL), deve-se criar um HttpClient indicando um SSLContext configurado, no mínimo, com os padrões TLS 1.0. Esta análise busca explicar como configurar corretamente uma instância de SSLContext. Depois basta usar, na sua implementação do OAuth2, a sua instância do SSLContext.
-
 - certificate
   - As part of the X.509 protocol (a.k.a. ISO Authentication framework), certificates are assigned by a trusted Certificate Authority and provide a strong binding between a party's identity or some other attributes and its public key.
+- RSA
+  - A very widely used public-key algorithm that can be used for either encryption or digital signing.
 
 - For historical reasons and in order to avoid a profligate consumption of reserved port numbers, application protocols that are secured by TLS 1.1, TLS 1.0, SSL 3.0, and SSL 2.0 all frequently share the same connection port.  For example, the https protocol (HTTP secured by SSL or TLS) uses port 443 regardless of which security protocol it is using.  Thus, some mechanism must be determined to distinguish and negotiate among the various protocols.
