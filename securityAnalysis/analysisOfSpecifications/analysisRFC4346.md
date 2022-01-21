@@ -30,3 +30,12 @@
   - Transport Layer Security protocol
 
 - For historical reasons and in order to avoid a profligate consumption of reserved port numbers, application protocols that are secured by TLS 1.1, TLS 1.0, SSL 3.0, and SSL 2.0 all frequently share the same connection port.  For example, the https protocol (HTTP secured by SSL or TLS) uses port 443 regardless of which security protocol it is using.  Thus, some mechanism must be determined to distinguish and negotiate among the various protocols.
+
+### Características da forma de comunicação (HTTPS+TSL_1_1)
+- Server Certificate
+  - When a server message will be sent:
+    - The server MUST send a certificate whenever the agreed-upon key exchange method is not an anonymous one. This message will always immediately follow the server hello message.
+    - The certificate type MUST be appropriate for the selected cipher suite's key exchange algorithm, and is generally an X.509v3 certificate.  It MUST contain a key that matches the key exchange method, as follows.  Unless otherwise specified, the signing algorithm for the certificate MUST be the same as the algorithm for the certificate key.  Unless otherwise specified, the public key MAY be of any length.
+- Client certificate
+  - When a client message will be sent:
+    - This is the first message the client can send after receiving a server hello done message.  This message is only sent if the server requests a certificate. If no suitable certificate is available, the client SHOULD send a certificate message containing no certificates. That is, the certificate_list structure has a length of zero. If client authentication is required by the server for the handshake to continue, it may respond with a fatal handshake failure alert.
