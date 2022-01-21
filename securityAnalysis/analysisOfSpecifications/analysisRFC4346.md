@@ -19,6 +19,6 @@
     - O TSL representa uma atualização do SSL em que se tem padrões ainda mais seguros.
   - Em resumo, o (HTTPS+TSL) é um protocolo de comunicação que se apresenta na camada de ***application protocol*** sobre a camada de TCP/IP.
   -  O que é relevante saber, para implementação Java Quarkus?
-    - Para requisições (HTTPS+TSL), deve-se criar um HttpClient indicando um SSLContext configurado, no mínimo, com os padrões TLS 1.0. Esta análise busca explicar como configurar corretamente uma instância de SSLContext. 
+    - Para requisições (HTTPS+TSL), deve-se criar um HttpClient indicando um SSLContext configurado, no mínimo, com os padrões TLS 1.0. Esta análise busca explicar como configurar corretamente uma instância de SSLContext. Depois basta usar, na sua implementação do OAuth2, a sua instância do SSLContext.
 
 - For historical reasons and in order to avoid a profligate consumption of reserved port numbers, application protocols that are secured by TLS 1.1, TLS 1.0, SSL 3.0, and SSL 2.0 all frequently share the same connection port.  For example, the https protocol (HTTP secured by SSL or TLS) uses port 443 regardless of which security protocol it is using.  Thus, some mechanism must be determined to distinguish and negotiate among the various protocols.
