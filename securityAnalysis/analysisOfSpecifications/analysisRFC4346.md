@@ -26,7 +26,7 @@
   - A very widely used public-key algorithm that can be used for either encryption or digital signing.
 - SSL
   - Netscape's Secure Socket Layer protocol SSL3. TLS is based on SSL Version 3.0
-- Transport Layer Security (TLS)
-  - This protocol; also, the Transport Layer Security working group of the Internet Engineering Task Force (IETF).  See "Comments" at the end of this document.
+- TLS
+  - Transport Layer Security protocol
 
 - For historical reasons and in order to avoid a profligate consumption of reserved port numbers, application protocols that are secured by TLS 1.1, TLS 1.0, SSL 3.0, and SSL 2.0 all frequently share the same connection port.  For example, the https protocol (HTTP secured by SSL or TLS) uses port 443 regardless of which security protocol it is using.  Thus, some mechanism must be determined to distinguish and negotiate among the various protocols.
