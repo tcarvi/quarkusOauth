@@ -11,7 +11,7 @@
   - Há uma camada de Transporte: TCP/IP, cujos protocolos possuem padrões e formas de específicas de comunicação.
   - Sobre esta camada, pode-se usar outra camada de padrões: uma camada de ***application protocol***.
   - Como exemplo de ***application protocol***, tem-se o HTTP. 
-  - HTTP nomalmente usa a porta 80. (redirecionamento automático pelo browser)
+    - HTTP nomalmente usa a porta 80. (redirecionamento automático pelo browser)
   - O HTTP pode se apresentar com algumas mudanças de padrão, tendo mais segurança.
   - HTTPS é isso: um ***application protocol*** similar a HTTP, mas com o acréscimo de padrões mais seguros.
     - HTTPS nomalmente usa a porta 443. (redirecionamento automático pelo browser)
